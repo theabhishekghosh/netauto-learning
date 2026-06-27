@@ -1,0 +1,13 @@
+interfaces:
+  - name: ge-0/0/0
+    description: Link to PE2
+    ip_address: 10.1.1.1/30
+  - name: ge-0/0/1
+    description: Link to CE1
+    ip_address: 10.1.1.5/30
+  - name: ge-0/0/2
+    description: Link to P4
+    ip_address: 10.1.1.9/30
+  - name: ge-0/0/3
+    description: Link to PE5
+    ip_address: 10.1.1.13/30
