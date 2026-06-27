@@ -11,6 +11,3 @@ interfaces:
   - name: ge-0/0/3
     description: Link to PE5
     ip_address: 10.1.1.13/30
-  - name: ge-0/0/4
-    description: Link to PE6
-    ip_address: 10.1.1.17/30
