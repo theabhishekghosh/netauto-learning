@@ -1,5 +1,6 @@
 from jnpr.junos.exception import ConnectError
 from week1_day6 import  NetworkDevice
+import time
 
 def collect_inventory(devices: list) -> list[dict]:
     """
@@ -47,5 +48,8 @@ if __name__ == "__main__":
     NetworkDevice("10.49.0.99",   "CE", "labroot", "lab123"),
     NetworkDevice("10.49.0.197",  "CE", "labroot", "lab123"),
 ]
+    start_time = time.time()
     results = collect_inventory(devices)
     print_inventory(results)
+    end_time = time.time()
+    print(f"\nInventory collection completed in {end_time - start_time:.2f} seconds.")
