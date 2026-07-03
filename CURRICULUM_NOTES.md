@@ -245,7 +245,7 @@ audit_tool/
 | 6 | Logging — replace print() with logging module, log levels, file handlers |
 | 7-8 | pytest — unit testing, mocking device connections |
 | 9-10 | **Network Config Audit Tool (capstone)** |
-| 11-12 | Buffer / Arista AVD+pyavd if interview timeline accelerates |
+| 11-12 | Buffer / Arista AVD+pyavd |
 
 ---
 
