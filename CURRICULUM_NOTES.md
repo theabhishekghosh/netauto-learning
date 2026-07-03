@@ -8,15 +8,13 @@
 ## Background
 
 Senior Technology Consultant, Juniper Networks PS, Bengaluru.  
-Triple JNCIE (SP, DC, ENT), 16+ years SP/DC networking experience.  
-Goal: Build production-grade Python network automation skills for AI-infra roles (NVIDIA, Arista) and SP automation (Telstra).
-
+Triple JNCIE (SP, DC, ENT), 16+ years SP/DC/ENT networking experience.  
+Goal: Build production-grade Python network automation skills 
 ---
 
 ## Lab Environment
 
 **Platform:** 11x MX240, Junos 24.4R2-S3.2  
-**Credentials:** labroot / lab123
 
 | Device | Role | Management IP |
 |--------|------|--------------|
