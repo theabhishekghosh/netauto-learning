@@ -142,7 +142,7 @@ class NetworkDevice:
         addresses = result.findall(".//address/name")
         return [addr.text for addr in addresses]
 if __name__ == "__main__":
-    with NetworkDevice(host="10.49.0.137",role="PE",user="labroot",password="lab123") as pe1:
+    with NetworkDevice(host="10.207.194.11",role="PE",user="labroot",password="lab123") as pe1:
         print(pe1.get_summary())
         print(pe1.get_interfaces())
         print(pe1.get_bgp_neighbors())

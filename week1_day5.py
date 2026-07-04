@@ -35,7 +35,7 @@ def get_device_facts(dev: Device) -> dict:
     }
 
 if __name__ == "__main__":
-    HOST = "10.49.0.137"
+    HOST = "10.207.194.11"
     USER = "labroot"
     PASSWORD = "lab123"
 

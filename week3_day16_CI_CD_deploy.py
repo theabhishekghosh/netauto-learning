@@ -93,7 +93,7 @@ def deploy_stage_confirmed(host: str, user: str, password: str, config_commands:
         print(f"Connection failed: {e}")
         return False
 if __name__ == "__main__":
-    host = "10.49.0.137"
+    host = "10.207.194.11"
     user = "labroot"
     password = "lab123"
     YAML_PATH = "interfaces.yaml"

@@ -36,17 +36,17 @@ def print_inventory(inventory: list[dict]) -> None:
 
 if __name__ == "__main__":
     devices = [
-    NetworkDevice("10.49.0.137",  "PE", "labroot", "lab123"),
-    NetworkDevice("10.49.16.181", "PE", "labroot", "lab123"),
-    NetworkDevice("10.49.16.140", "PE", "labroot", "lab123"),
-    NetworkDevice("10.49.16.84",  "P",  "labroot", "lab123"),
-    NetworkDevice("10.49.25.94",  "PE", "labroot", "lab123"),
-    NetworkDevice("10.49.15.198", "PE", "labroot", "lab123"),
-    NetworkDevice("10.49.15.126", "PE", "labroot", "lab123"),
-    NetworkDevice("10.49.16.48",  "CE", "labroot", "lab123"),
-    NetworkDevice("10.49.15.128", "CE", "labroot", "lab123"),
-    NetworkDevice("10.49.0.99",   "CE", "labroot", "lab123"),
-    NetworkDevice("10.49.0.197",  "CE", "labroot", "lab123"),
+    NetworkDevice("10.207.194.11",  "PE", "labroot", "lab123"),
+    NetworkDevice("10.207.194.94", "PE", "labroot", "lab123"),
+    NetworkDevice("10.207.195.43", "PE", "labroot", "lab123"),
+    NetworkDevice("10.207.194.92",  "P",  "labroot", "lab123"),
+    NetworkDevice("10.207.205.22",  "PE", "labroot", "lab123"),
+    NetworkDevice("10.207.207.208", "PE", "labroot", "lab123"),
+    NetworkDevice("10.207.210.187", "PE", "labroot", "lab123"),
+    NetworkDevice("10.207.213.128",  "CE", "labroot", "lab123"),
+    NetworkDevice("10.207.208.59", "CE", "labroot", "lab123"),
+    NetworkDevice("10.207.206.34",   "CE", "labroot", "lab123"),
+    NetworkDevice("10.207.216.116",  "CE", "labroot", "lab123"),
 ]
     start_time = time.time()
     results = collect_inventory(devices)

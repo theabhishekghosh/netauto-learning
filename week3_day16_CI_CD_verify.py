@@ -111,7 +111,7 @@ def verify_stage(host: str, user: str,role: str,password: str) -> bool:
             return False
 
 if __name__ == "__main__":
-    host = "10.49.0.137"
+    host = "10.207.194.11"
     user = "labroot"
     role = "PE"
     password = "lab123"

@@ -16,7 +16,7 @@ def find_problem_interfaces(interfaces: list[dict]) -> list[dict]:
     ]
 
 if __name__ == "__main__":
-    pe1 = NetworkDevice("10.49.0.137", "PE", "labroot", "lab123")
+    pe1 = NetworkDevice("10.207.194.11", "PE", "labroot", "lab123")
     pe1.connect()
     interfaces = pe1.get_interfaces()
     for intf in interfaces:

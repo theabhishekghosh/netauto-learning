@@ -15,7 +15,7 @@ def find_down_bgp_peers(peers: list[dict]) -> list[dict]:
 
 
 if __name__ == "__main__":
-    pe1 = NetworkDevice("10.49.0.137", "PE", "labroot", "lab123")
+    pe1 = NetworkDevice("10.207.194.11", "PE", "labroot", "lab123")
     pe1.connect()
 
     peers = pe1.get_bgp_neighbors()

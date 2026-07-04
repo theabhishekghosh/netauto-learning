@@ -18,17 +18,17 @@ Goal: Build production-grade Python network automation skills
 
 | Device | Role | Management IP |
 |--------|------|--------------|
-| PE1_RE | PE | 10.49.0.137 |
-| PE2_RE | PE | 10.49.16.181 |
-| PE3_RE | PE | 10.49.16.140 |
-| P4_RE  | P  | 10.49.16.84 |
-| PE5_RE | PE | 10.49.25.94 |
-| PE6_RE | PE | 10.49.15.198 |
-| PE7_RE | PE | 10.49.15.126 |
-| CE1_RE | CE | 10.49.16.48 |
-| CE2_RE | CE | 10.49.15.128 |
-| CE3_RE | CE | 10.49.0.99 |
-| CE4_RE | CE | 10.49.0.197 |
+| PE1_RE | PE | 10.207.194.11 |
+| PE2_RE | PE | 10.207.194.94 |
+| PE3_RE | PE | 10.207.195.43 |
+| P4_RE  | P  | 10.207.194.92 |
+| PE5_RE | PE | 10.207.205.22 |
+| PE6_RE | PE | 10.207.207.208 |
+| PE7_RE | PE | 10.207.210.187 |
+| CE1_RE | CE | 10.207.213.128 |
+| CE2_RE | CE | 10.207.208.59 |
+| CE3_RE | CE | 10.207.206.34 |
+| CE4_RE | CE | 10.207.216.116 |
 
 **Mac setup:** Python 3.11.15 in venv at ~/netauto-learning/venv  
 **Editor:** VS Code with Pylance

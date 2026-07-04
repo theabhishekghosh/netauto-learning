@@ -28,17 +28,17 @@ USER = "labroot"
 PASSWORD = "lab123"
 
 DEVICES = [
-    NetworkDevice("10.49.0.137",  "PE", USER, PASSWORD),
-    NetworkDevice("10.49.16.181", "PE", USER, PASSWORD),
-    NetworkDevice("10.49.16.140", "PE", USER, PASSWORD),
-    NetworkDevice("10.49.16.84",  "P",  USER, PASSWORD),
-    NetworkDevice("10.49.25.94",  "PE", USER, PASSWORD),
-    NetworkDevice("10.49.15.198", "PE", USER, PASSWORD),
-    NetworkDevice("10.49.15.126", "PE", USER, PASSWORD),
-    NetworkDevice("10.49.16.48",  "CE", USER, PASSWORD),
-    NetworkDevice("10.49.15.128", "CE", USER, PASSWORD),
-    NetworkDevice("10.49.0.99",   "CE", USER, PASSWORD),
-    NetworkDevice("10.49.0.197",  "CE", USER, PASSWORD),
+    NetworkDevice("10.207.194.11",  "PE", USER, PASSWORD),
+    NetworkDevice("10.207.194.94", "PE", USER, PASSWORD),
+    NetworkDevice("10.207.195.43", "PE", USER, PASSWORD),
+    NetworkDevice("10.207.194.92",  "P",  USER, PASSWORD),
+    NetworkDevice("10.207.205.22",  "PE", USER, PASSWORD),
+    NetworkDevice("10.207.207.208", "PE", USER, PASSWORD),
+    NetworkDevice("10.207.210.187", "PE", USER, PASSWORD),
+    NetworkDevice("10.207.213.128",  "CE", USER, PASSWORD),
+    NetworkDevice("10.207.208.59", "CE", USER, PASSWORD),
+    NetworkDevice("10.207.206.34",   "CE", USER, PASSWORD),
+    NetworkDevice("10.207.216.116",  "CE", USER, PASSWORD),
 ]
 
 
@@ -96,7 +96,7 @@ def get_device_bgp(host: str):
 def deploy_config(request: DeployRequest):
     """
     Deploy config to a device using commit confirmed.
-    POST body: {"host": "10.49.0.137", "config": "set interfaces...", "confirm_minutes": 1}
+    POST body: {"host": "10.207.194.11", "config": "set interfaces...", "confirm_minutes": 1}
     """
     try:
         with NetworkDevice(request.host, request.role, USER, PASSWORD) as device:

@@ -31,7 +31,7 @@ def deploy_config(host: str, config: str, confirm_minutes: int = 1) -> dict:
 if __name__ == "__main__":
     # Test 1 — get facts for PE2
     print("=== PE2 Facts ===")
-    facts = get_device_facts("10.49.16.181")
+    facts = get_device_facts("10.207.194.94")
     print(facts)
 
     # Test 2 — get full inventory
@@ -44,7 +44,7 @@ if __name__ == "__main__":
     # Test 3 — deploy a safe change
     print("\n=== Deploy ===")
     result = deploy_config(
-        host="10.49.0.137",
+        host="10.207.194.11",
         config="set interfaces ge-0/0/9 unit 0 description api-client-test"
     )
     print(result)

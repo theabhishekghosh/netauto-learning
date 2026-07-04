@@ -104,11 +104,11 @@ if __name__ == "__main__":
     # Safe test — just adding a description to unused interfaces
     # Using only PE devices for this test
     devices_and_configs = [
-        (NetworkDevice("10.49.0.137",  "PE", "labroot", "lab123"),
+        (NetworkDevice("10.207.194.11",  "PE", "labroot", "lab123"),
          'set interfaces ge-0/0/9 unit 0 description "bulk-deploy-test-PE1"'),
-        (NetworkDevice("10.49.16.181", "PE", "labroot", "lab123"),
+        (NetworkDevice("10.207.194.94", "PE", "labroot", "lab123"),
          'set interfaces ge-0/0/9 unit 0 description "bulk-deploy-test-PE2"'),
-        (NetworkDevice("10.49.16.140", "PE", "labroot", "lab123"),
+        (NetworkDevice("10.207.195.43", "PE", "labroot", "lab123"),
          'set interfaces ge-0/0/9 unit 0 description "bulk-deploy-test-PE3"'),
     ]
 

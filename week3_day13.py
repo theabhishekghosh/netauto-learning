@@ -23,7 +23,7 @@ def push_config_dry_run(dev: Device, config_text: str) -> str:
 
 
 if __name__ == "__main__":
-    HOST = "10.49.0.137"
+    HOST = "10.207.194.11"
     USER = "labroot"
     PASSWORD = "lab123"
 
