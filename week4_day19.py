@@ -1,9 +1,17 @@
+import sys
 import time
 from concurrent.futures import ThreadPoolExecutor
 from jnpr.junos.exception import ConnectError
 from week1_day6 import NetworkDevice
 import logging
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s | %(levelname)-8s | %(name)s | %(message)s",
+    stream=sys.stdout 
+)
 logging.getLogger("paramiko").setLevel(logging.CRITICAL)
+logging.getLogger("paramiko.transport").setLevel(logging.CRITICAL)
+logging.getLogger("ncclient").setLevel(logging.CRITICAL)
 
 logger = logging.getLogger(__name__)
 

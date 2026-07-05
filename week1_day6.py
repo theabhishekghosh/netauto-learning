@@ -1,10 +1,11 @@
-from unittest import result
-
+import logging
 from jnpr.junos import Device
 from jnpr.junos.exception import ConnectError
 from jnpr.junos.op.ethport import EthPortTable
 from jnpr.junos.utils.config import Config
 from jnpr.junos.exception import ConfigLoadError, CommitError
+
+logger = logging.getLogger(__name__)
 
 class NetworkDevice:
     
@@ -38,7 +39,6 @@ class NetworkDevice:
             self.dev.open()
             self.facts = self.dev.facts
         except ConnectError as e:
-            print(f"Error connecting to device {self.host}: {e}")
             raise # re-raise the exception so the caller knows connection failed
     def disconnect(self) -> None:
         # method — action the object can perform
