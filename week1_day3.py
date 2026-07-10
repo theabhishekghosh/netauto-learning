@@ -19,7 +19,5 @@ if __name__ == "__main__":
     down_interfaces = get_down_interfaces(interfaces)
     print("Down interfaces:", down_interfaces)
     print(get_down_interfaces([]))  # empty list
-    broken = [
-    {"name": "ge-0/0/0"},  # missing status key
-]
-print(get_down_interfaces(broken))
+    broken = [{"name": "ge-0/0/0"},]  # missing status key
+    print(get_down_interfaces(broken))
