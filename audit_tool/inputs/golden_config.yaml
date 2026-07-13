@@ -1,0 +1,25 @@
+golden_config:
+  all_devices:
+    - loopback_configured
+    - ospf_area0_enabled
+    - ospf_te_enabled
+    - rsvp_enabled
+    - autonomous_system: 65001
+
+  pe_devices:
+    - bgp_group_internal
+    - bgp_export_nhs
+    - mpls_on_loopback
+
+  ce_interface_rules:
+    must_not_have:
+      - family_mpls
+      - ospf_area0
+
+  core_interface_rules:
+    must_have:
+      - family_mpls
+      - ospf_area0
+  rr_devices:
+    bgp_group_rrc:
+      must_not_have_export: NHS    # RR must not modify next-hop

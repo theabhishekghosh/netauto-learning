@@ -1,0 +1,89 @@
+# audit_tool/inputs/device_inventory.yaml
+# Network device inventory with topology context
+# Used by: offline audit (config file parsing) and online audit (live PyEZ)
+
+network:
+  name: "BGP-LU Seamless MPLS Lab"
+  igp: ospf
+  bgp_as: 65001
+  route_reflector: P4_RE
+
+devices:
+  - hostname: PE1_RE
+    role: PE
+    loopback: 1.1.1.1
+    management_ip: 10.207.194.11
+    config_file: snapshots/pe1.log
+    ce_interfaces: []
+    core_interfaces:
+      - ge-0/0/1    # PE1 → PE2
+      - ge-0/0/2    # PE1 → PE6
+
+  - hostname: PE2_RE
+    role: PE
+    loopback: 2.2.2.2
+    management_ip: 10.207.194.94
+    config_file: snapshots/pe2.log
+    ce_interfaces: []
+    core_interfaces:
+      - ge-0/0/0    # PE2 → PE3
+      - ge-0/0/1    # PE2 → PE1
+      - ge-0/0/2    # PE2 → PE7
+      - ge-0/0/3    # PE2 → PE6
+      - ge-0/0/4    # PE2 → PE6
+
+  - hostname: PE3_RE
+    role: PE
+    loopback: 3.3.3.3
+    management_ip: 10.207.195.43
+    config_file: snapshots/pe3.log
+    ce_interfaces:
+      - ge-0/0/2    # PE3 → CE3
+    core_interfaces:
+      - ge-0/0/0    # PE3 → PE2
+      - ge-0/0/1    # PE3 → P4
+
+  - hostname: P4_RE
+    role: P
+    loopback: 4.4.4.4
+    management_ip: 10.207.194.92
+    config_file: snapshots/p4.log
+    ce_interfaces: []
+    core_interfaces:
+      - ge-0/0/0    # P4 → PE5
+      - ge-0/0/1    # P4 → PE3
+
+  - hostname: PE5_RE
+    role: PE
+    loopback: 5.5.5.5
+    management_ip: 10.207.205.22
+    config_file: snapshots/pe5.log
+    ce_interfaces:
+      - ge-0/0/2    # PE5 → CE4
+    core_interfaces:
+      - ge-0/0/0    # PE5 → P4
+      - ge-0/0/1    # PE5 → PE6
+
+  - hostname: PE6_RE
+    role: PE
+    loopback: 6.6.6.6
+    management_ip: 10.207.207.208
+    config_file: snapshots/pe6.log
+    ce_interfaces: []
+    core_interfaces:
+      - ge-0/0/0    # PE6 → PE7
+      - ge-0/0/1    # PE6 → PE5
+      - ge-0/0/2    # PE6 → PE1
+      - ge-0/0/3    # PE6 → PE2
+      - ge-0/0/4    # PE6 → PE2
+
+  - hostname: PE7_RE
+    role: PE
+    loopback: 7.7.7.7
+    management_ip: 10.207.210.187
+    config_file: snapshots/pe7.log
+    ce_interfaces:
+      - ge-0/0/1    # PE7 → CE2 (L3VPN — in VRF, not global OSPF)
+    core_interfaces:
+      - ge-0/0/0    # PE7 → PE6
+      - ge-0/0/2    # PE7 → PE2
