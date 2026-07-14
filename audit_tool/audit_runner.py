@@ -7,6 +7,7 @@ from audit_tool.parsers.config_parser import load_device_config
 from audit_tool.checks.bgp_check import check_bgp_export_consistency
 from audit_tool.checks.interface_check import check_ce_interface_hygiene
 from audit_tool.checks.models import AuditReport
+from audit_tool.reports.markdown_report import save_markdown
 
 logging.basicConfig(
     level=logging.INFO,
@@ -98,3 +99,5 @@ if __name__ == "__main__":
         for f in result.findings:
             print(f"    [{f.severity.value}] {f.device}: {f.message}")
             print(f"    → {f.detail}")
+save_markdown(report, "audit_report.md")
+           
