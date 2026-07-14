@@ -16,10 +16,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-def run_audit(
-    inventory_path: str,
-    snapshot_dir: str
-) -> AuditReport:
+def run_audit(inventory_path: str, snapshot_dir: str) -> AuditReport:
     """
     Run full config audit against offline config snapshots.
 
