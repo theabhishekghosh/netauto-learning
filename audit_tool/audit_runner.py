@@ -99,5 +99,5 @@ if __name__ == "__main__":
         for f in result.findings:
             print(f"    [{f.severity.value}] {f.device}: {f.message}")
             print(f"    → {f.detail}")
-save_markdown(report, "audit_report.md")
+    save_markdown(report, "audit_report.md")
            
