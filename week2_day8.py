@@ -21,8 +21,8 @@ if __name__ == "__main__":
     interfaces = pe1.get_interfaces()
     for intf in interfaces:
          print(intf)
-    pe1.disconnect()
     problems = find_problem_interfaces(interfaces)
     print(f"\n{len(problems)} interfaces are admin-up but oper-down:")
     for p in problems:
         print(f"  {p['name']}")
+    pe1.disconnect()

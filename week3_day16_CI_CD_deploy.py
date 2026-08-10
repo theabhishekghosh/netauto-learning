@@ -78,6 +78,7 @@ def deploy_stage_confirmed(host: str, user: str, password: str, config_commands:
             print("Committed with 1-minute confirm timer running...")
         # Verify stage — reuse the same open connection
             print("=== VERIFY STAGE ===")
+            dev.facts_refresh()  # refresh facts to check if device is still reachable
             if dev.facts["hostname"]:
                 print(f"Device {dev.facts['hostname']} still reachable — confirming commit")
                 cu.commit()  # plain commit = confirms, cancels the rollback timer

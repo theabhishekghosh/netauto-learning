@@ -1,6 +1,17 @@
 from jnpr.junos import Device
 from jnpr.junos.exception import ConnectError
 
+#dev.facts           # attribute — no () — reading stored data
+#dev.open()          # method — has () — doing something
+#dev.close()         # method — has () — doing something
+#interface.get()     # method — has () — doing something
+#def is defining a method — has () — doing something. Is written under a class.
+#def is also used to define a function when you write it outside of a class. The keyword stays exactly the same; only the location of the code changes what it is called
+#If the thing before the dot is a module name → it's a function.
+#If the thing before the dot is an object/variable → it's a method.
+#() at the end → method → action
+#No () → attribute → stored data
+
 def connect_device(host: str, user: str, password: str) -> Device: 
     """
     Connect to a Junos device using PyEZ.

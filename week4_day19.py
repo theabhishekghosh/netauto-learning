@@ -57,7 +57,7 @@ if __name__ == "__main__":
     start = time.time()
 
     with ThreadPoolExecutor(max_workers=12) as executor:
-        results = list(executor.map(poll_one_device, devices))
+        results = list(executor.map(poll_one_device, devices)) #executor.map(function, iterable)
 
     end = time.time()
 

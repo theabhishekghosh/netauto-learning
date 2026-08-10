@@ -59,7 +59,7 @@ def check_existing_config(host: str, role: str, user: str, password: str, interf
         for interface in interfaces:
             existing = device.get_interface_addresses(interface["name"])
             intended = interface["ip_address"]
-            if existing and intended not in existing:
+            if existing and intended not in existing: #If the interface has any existing addresses AND the one we're about to push isn't already one of them, that's a conflict.
                 print(f"CONFLICT on {interface['name']}: existing={existing}, intended={intended}")
                 conflicts_found = True
             else:
