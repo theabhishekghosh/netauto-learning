@@ -73,7 +73,7 @@ def run_audit(inventory_path: str, snapshot_dir: str) -> AuditReport:
     logger.info(f"Audit complete — {summary}")
 
     return report
-def run_audit_online(inventory_path: str,user: str = "labroot",password: str = "lab123") -> AuditReport:
+def run_audit_online(inventory_path: str, user: str, password: str) -> AuditReport:
     """
     Run full audit using live device data via PyEZ.
 
