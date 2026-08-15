@@ -9,6 +9,7 @@ from audit_tool.checks.models import AuditReport, Severity
 from audit_tool.audit_runner import run_audit, commit_findings
 from audit_tool.reports.markdown_report import save_markdown
 from audit_tool.audit_runner import run_audit, run_audit_online, commit_findings
+from config import AUDIT_API_KEY
 
 logging.basicConfig(
     level=logging.INFO,
@@ -18,7 +19,7 @@ logging.basicConfig(
 
 app = FastAPI(title="Network Config Audit API")
 
-API_KEY = "audit-secret-2026"
+API_KEY = AUDIT_API_KEY
 API_KEY_HEADER = APIKeyHeader(name="X-API-Key")
 
 # store last report in memory — simple cache

@@ -12,7 +12,7 @@ devices:
   - hostname: PE1_RE
     role: PE
     loopback: 1.1.1.1
-    management_ip: 10.207.194.11
+    management_ip: 192.0.2.11
     config_file: snapshots/pe1.cfg
     ce_interfaces: []
     core_interfaces:
@@ -22,7 +22,7 @@ devices:
   - hostname: PE2_RE
     role: PE
     loopback: 2.2.2.2
-    management_ip: 10.207.194.94
+    management_ip: 192.0.2.94
     config_file: snapshots/pe2.cfg
     ce_interfaces: []
     core_interfaces:
@@ -35,7 +35,7 @@ devices:
   - hostname: PE3_RE
     role: PE
     loopback: 3.3.3.3
-    management_ip: 10.207.195.43
+    management_ip: 192.0.2.43
     config_file: snapshots/pe3.cfg
     ce_interfaces:
       - ge-0/0/2    # PE3 → CE3
@@ -46,7 +46,7 @@ devices:
   - hostname: P4_RE
     role: P
     loopback: 4.4.4.4
-    management_ip: 10.207.194.92
+    management_ip: 192.0.2.92
     config_file: snapshots/p4.cfg
     ce_interfaces: []
     core_interfaces:
@@ -56,7 +56,7 @@ devices:
   - hostname: PE5_RE
     role: PE
     loopback: 5.5.5.5
-    management_ip: 10.207.205.22
+    management_ip: 192.0.2.22
     config_file: snapshots/pe5.cfg
     ce_interfaces:
       - ge-0/0/2    # PE5 → CE4
@@ -67,7 +67,7 @@ devices:
   - hostname: PE6_RE
     role: PE
     loopback: 6.6.6.6
-    management_ip: 10.207.207.208
+    management_ip: 192.0.2.208
     config_file: snapshots/pe6.cfg
     ce_interfaces: []
     core_interfaces:
@@ -80,7 +80,7 @@ devices:
   - hostname: PE7_RE
     role: PE
     loopback: 7.7.7.7
-    management_ip: 10.207.210.187
+    management_ip: 192.0.2.187
     config_file: snapshots/pe7.cfg
     ce_interfaces:
       - ge-0/0/1    # PE7 → CE2 (L3VPN — in VRF, not global OSPF)
