@@ -6,6 +6,9 @@ from fastapi.security import APIKeyHeader
 from pydantic import BaseModel
 from audit_tool.audit_runner import run_audit
 from audit_tool.checks.models import AuditReport, Severity
+from audit_tool.audit_runner import run_audit, commit_findings
+from audit_tool.reports.markdown_report import save_markdown
+from audit_tool.audit_runner import run_audit, run_audit_online, commit_findings
 
 logging.basicConfig(
     level=logging.INFO,
@@ -32,6 +35,10 @@ class AuditRequest(BaseModel):
     inventory_path: str = "audit_tool/inputs/device_inventory.yaml"
     snapshot_dir: str = "audit_tool/inputs/snapshots"
 
+class OnlineAuditRequest(BaseModel):
+    inventory_path: str = "audit_tool/inputs/device_inventory.yaml"
+    user: str = "labroot"
+    password: str = "lab123"
 
 @app.get("/")
 def root():
@@ -119,3 +126,74 @@ def get_findings_by_severity(severity: str):
             for f in findings
         ]
     }
+@app.post("/audit/offline", dependencies=[Depends(verify_api_key)])
+def run_offline_audit(request: AuditRequest):
+    global _last_report
+    try:
+        report = run_audit(
+            inventory_path=request.inventory_path,
+            snapshot_dir=request.snapshot_dir
+        )
+        _last_report = report
+
+        # save and commit findings
+        save_markdown(report, "audit_report.md")
+        committed = commit_findings("audit_report.md", report.network_name)
+
+        return {
+            "network_name": report.network_name,
+            "generated_at": report.generated_at,
+            "committed_to_git": committed,
+            "summary": report.summary(),
+            "findings": [
+                {
+                    "device": f.device,
+                    "check": f.check,
+                    "severity": f.severity.value,
+                    "message": f.message,
+                    "detail": f.detail
+                }
+                for f in report.all_findings()
+            ]
+        }
+    except FileNotFoundError as e:
+        raise HTTPException(status_code=404, detail=f"File not found: {e}")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Audit failed: {e}")
+
+@app.post("/audit/online", dependencies=[Depends(verify_api_key)])
+def run_online_audit(request: OnlineAuditRequest):
+    """
+    Trigger a live audit against real devices via PyEZ.
+    Requires network access to management IPs.
+    """
+    global _last_report
+    try:
+        report = run_audit_online(
+            inventory_path=request.inventory_path,
+            user=request.user,
+            password=request.password
+        )
+        _last_report = report
+        save_markdown(report, "audit_report_online.md")
+        committed = commit_findings("audit_report_online.md", report.network_name)
+
+        return {
+            "network_name": report.network_name,
+            "generated_at": report.generated_at,
+            "mode": "online",
+            "committed_to_git": committed,
+            "summary": report.summary(),
+            "findings": [
+                {
+                    "device": f.device,
+                    "check": f.check,
+                    "severity": f.severity.value,
+                    "message": f.message,
+                    "detail": f.detail
+                }
+                for f in report.all_findings()
+            ]
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Online audit failed: {e}")

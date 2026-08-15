@@ -42,7 +42,7 @@ class AuditReport:
     def all_findings(self) -> list[Finding]:
         return [
             finding
-            for result in self.check_results
+            for result in self.check_results # iterate over report.check_results in audit_runner.py 
             for finding in result.findings
         ]
 

@@ -141,6 +141,56 @@ class NetworkDevice:
         result = self.dev.rpc.get_config(filter_xml=f"<configuration><interfaces><interface><name>{interface_name}</name></interface></interfaces></configuration>")
         addresses = result.findall(".//address/name")
         return [addr.text for addr in addresses]
+    def get_bgp_group_config(self) -> dict:
+        """
+        Get BGP group configuration including export policies.
+        Uses get-config RPC to read BGP group config directly.
+        """
+        result = self.dev.rpc.get_config(
+            filter_xml="<configuration><protocols><bgp></bgp></protocols></configuration>"
+        )
+        groups = {}
+        for group in result.findall(".//group"):
+            name_el = group.find("name")
+            if name_el is None:
+                continue
+            group_name = name_el.text
+            export_policies = [e.text for e in group.findall("export")]
+            neighbors = [n.find("name").text for n in group.findall("neighbor")
+                        if n.find("name") is not None]
+            groups[group_name] = {
+                "export_policies": export_policies,
+                "neighbors": neighbors
+            }
+        return groups
+
+    def get_ospf_interfaces(self) -> dict:
+        """
+        Get OSPF interface configuration per area.
+        """
+        result = self.dev.rpc.get_config(
+            filter_xml="<configuration><protocols><ospf></ospf></protocols></configuration>"
+        )
+        areas = {}
+        for area in result.findall(".//area"):
+            area_name_el = area.find("name")
+            if area_name_el is None:
+                continue
+            area_name = area_name_el.text
+            interfaces = [i.find("name").text for i in area.findall("interface")
+                        if i.find("name") is not None]
+            areas[area_name] = {"interfaces": interfaces}
+        return areas
+
+    def get_mpls_interfaces(self) -> list[str]:
+        """
+        Get MPLS-enabled interfaces.
+        """
+        result = self.dev.rpc.get_config(
+            filter_xml="<configuration><protocols><mpls></mpls></protocols></configuration>"
+        )
+        return [i.find("name").text for i in result.findall(".//interface")
+                if i.find("name") is not None]
 if __name__ == "__main__":
     with NetworkDevice(host="10.207.194.11",role="PE",user="labroot",password="lab123") as pe1:
         print(pe1.get_summary())

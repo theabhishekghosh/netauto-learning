@@ -3,6 +3,8 @@ import os
 import yaml
 import logging
 import sys
+import subprocess
+from datetime import datetime
 from audit_tool.parsers.config_parser import load_device_config
 from audit_tool.checks.bgp_check import check_bgp_export_consistency
 from audit_tool.checks.interface_check import check_ce_interface_hygiene
@@ -71,7 +73,77 @@ def run_audit(inventory_path: str, snapshot_dir: str) -> AuditReport:
     logger.info(f"Audit complete — {summary}")
 
     return report
+def run_audit_online(inventory_path: str,user: str = "labroot",password: str = "lab123") -> AuditReport:
+    """
+    Run full audit using live device data via PyEZ.
 
+    Args:
+        inventory_path: Path to device_inventory.yaml
+        user: SSH username
+        password: SSH password
+
+    Returns:
+        AuditReport with all findings
+    """
+    from audit_tool.collectors.live_state import collect_fleet_state
+
+    with open(inventory_path) as f:
+        inventory = yaml.safe_load(f)
+
+    network_name = inventory["network"]["name"]
+    device_inventory = inventory["devices"]
+
+    logger.info(f"Starting ONLINE audit for: {network_name}")
+
+    # collect live state from all devices
+    configs = collect_fleet_state(device_inventory, user, password)
+
+    if not configs:
+        logger.error("No devices responded — cannot run audit")
+        return AuditReport(network_name=network_name)
+
+    logger.info(f"Collected live state from {len(configs)} devices")
+
+    # run same checks as offline mode
+    report = AuditReport(network_name=f"{network_name} (Online)")
+
+    logger.info("Running BGP export consistency check...")
+    bgp_result = check_bgp_export_consistency(configs)
+    report.check_results.append(bgp_result)
+
+    logger.info("Running CE interface hygiene check...")
+    intf_result = check_ce_interface_hygiene(configs, device_inventory)
+    report.check_results.append(intf_result)
+
+    summary = report.summary()
+    logger.info(f"Online audit complete — {summary}")
+
+    return report
+
+def commit_findings(report_path: str, network_name: str) -> bool:
+    """
+    Git-commit the audit report for a permanent audit trail.
+
+    Args:
+        report_path: Path to the saved Markdown report
+        network_name: Network name for the commit message
+
+    Returns:
+        True if commit succeeded, False otherwise
+    """
+    try:
+        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M")
+        commit_message = f"Audit findings: {network_name} — {timestamp}"
+
+        subprocess.run(["git", "add", report_path], check=True)
+        subprocess.run(["git", "commit", "-m", commit_message], check=True)
+
+        logger.info(f"Findings committed to Git: {commit_message}")
+        return True
+
+    except subprocess.CalledProcessError as e:
+        logger.warning(f"Git commit failed — {e}")
+        return False
 
 if __name__ == "__main__":
     report = run_audit(
@@ -100,4 +172,4 @@ if __name__ == "__main__":
             print(f"    [{f.severity.value}] {f.device}: {f.message}")
             print(f"    → {f.detail}")
     save_markdown(report, "audit_report.md")
-           
+    commit_findings("audit_report.md", report.network_name)
